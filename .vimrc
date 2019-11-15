@@ -1,4 +1,5 @@
-" Author: Amir Salihefendic
+" Author:
+"       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
 " Version: 
 "
