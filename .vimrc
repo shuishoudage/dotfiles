@@ -37,7 +37,7 @@
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute pathogen#infect('/usr/local/share/vim/vim81/doc/{}')
+execute pathogen#infect('~/.vim/bundle/{}')
 syntax on
 filetype plugin indent on
 
@@ -45,6 +45,7 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DO NOT PUT MAPPING HERE, otherwise, it will not be excuted
 " be improved, required, if not set it will compatible with Vi
 " which means it will reduce the functionality of vim
 set nocompatible    
@@ -56,11 +57,11 @@ set path+=~/Google_Drive/**
 
 "set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=/usr/local/share/vim/vim81/doc
+set rtp+=/usr/local/share/vim/vim80/doc
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'szw/vim-tags'
 Plugin 'flazz/vim-colorschemes'
 
@@ -146,9 +147,6 @@ Plugin 'greyblake/vim-preview'
 
 " plugin for quick navigate --> esay motion
 Plugin 'easymotion/vim-easymotion'
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " auto complete
 Plugin 'vim-scripts/OmniCppComplete'
@@ -168,6 +166,8 @@ Plugin 'scrooloose/nerdtree'
 let g:NERDTreeMapOpenInTab = '\n' 
 let g:NERDTreeWinPos = "right" " always open nerdtree at right hand position 
 let g:NERDTreeWinSize = 50
+" load nerdtree when login vim
+" autocmd vimenter * NERDTree
 
 
 " this fonts just for the airline plugin
@@ -187,7 +187,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup'
 
 " All of your Plugins must be added before the following line
 call vundle#end()       "required
@@ -410,10 +410,10 @@ map k gk
 map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
-map <C-n> <C-W>j
-map <C-p> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-n> <C-W>j
+" map <C-p> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>
@@ -471,10 +471,10 @@ set laststatus=2
 set tw=99
 
 " set color columne
-set colorcolumn=120
+set colorcolumn=100
 
 " set the highlight color for rightside line
-highlight ColorColumn ctermbg=100 
+highlight ColorColumn ctermbg=80 
 
 set wrap "Wrap lines
 
@@ -492,6 +492,9 @@ nnoremap 0 ^
 
 " mapping G to Gzz
 nnoremap G Gzz
+
+" make save simple
+nnoremap ss :w<CR>
 
 "Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 vnoremap <C-S-j> :m '>+1<CR>gv=gv
@@ -513,6 +516,9 @@ nnoremap <leader>gt :YcmCompleter GetType<cr>
 " get documentation
 nnoremap <leader>gd :YcmCompleter GetDoc<cr>
 
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " mapping for convert lowercase to uppercase
 nnoremap <c-u> viW<s-u>
@@ -566,6 +572,8 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 " indent file when opening file by following extension
 autocmd BufRead *.html,*.c,*.cpp,*.h :normal gg=G
 
+" map cmd+s to save file
+map <M-s> :w<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ack searching and cope displaying 
