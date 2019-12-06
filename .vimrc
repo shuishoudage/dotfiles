@@ -62,26 +62,16 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'szw/vim-tags'
 Plugin 'flazz/vim-colorschemes'
 
 " this plugin for the vim layout 
-Plugin 'bling/vim-airline'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
+Plugin 'vim-airline/vim-airline'
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#tabline#enabled = 1
 
-" universal Ctags 
-"Plugin 'universal-ctags/ctags'
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
-set autochdir
-set tags+=../tags
-set tags+=/usr/include/tags
-set tags+=tags
-set tags+=~/.vim/tags/gtktags
-set tags+=~/.vim/tags/systags
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='powerlineish'
 
-" tag list 
-Plugin 'vim-scripts/taglist.vim'
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
@@ -102,7 +92,7 @@ endif
 " Plugin 'derekwyatt/vim-scala'
 
 " HTML supporting zen coding
-Plugin 'mattn/emmet-vim' 
+" Plugin 'mattn/emmet-vim' 
 
 " python mode plugin
 Plugin 'klen/python-mode'
@@ -116,43 +106,21 @@ let g:pymode_repo_lookup_project = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => functional support 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Helm swoop
-Plugin 'pelodelfuego/vim-swoop'
-let g:swoopHighlight = ["hi! link SwoopBufferLineHi Warning", "hi! link SwoopPatternHi Error"]
-
-
-" Youcompleteme
-" Plugin 'Valloric/YouCompleteMe'
-" let g:ycm_path_to_python_interpreter = '/usr/local/bin/python2'
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-" let g:ycm_key_list_select_completion = ['<c-j>']
-" let g:ycm_key_list_previous_completion = ['<c-k>']
-" let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1, 'python': 1}
-
 " another auto completion engine for nodejs
-Plugin 'ternjs/tern_for_vim'
+" Plugin 'ternjs/tern_for_vim'
 
 
 " markdown preview
-Plugin 'greyblake/vim-preview'
-
-" vim-note taking
-" Plugin 'xolox/vim-notes'
-" Plugin 'xolox/vim-misc'
-" let g:notes_markdown_program = 'redcarpet'
-
-" tpp: vim presentation tool
-" Plugin 'cbbrowne/tpp'
-
+Plugin 'JamshedVesuna/vim-markdown-preview'
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
 
 " plugin for quick navigate --> esay motion
 Plugin 'easymotion/vim-easymotion'
 
-" auto complete
-Plugin 'vim-scripts/OmniCppComplete'
-
-" vim-surrond for change surrond mark
+" vim-surrond for change ** surrond ** mark
 Plugin 'tpope/vim-surround'
+let g:surround_42="**\r**"
 
 " vim-comments
 Plugin 'tpope/vim-commentary'
@@ -163,15 +131,12 @@ Plugin 'tpope/vim-commentary'
 " this plugin for create a directory tree
 Plugin 'scrooloose/nerdtree'
 "nnoremap <leader>nd :NERDTreeToggle<CR> 
+" load nerdtree when login vim
+" autocmd vimenter * NERDTree
 let g:NERDTreeMapOpenInTab = '\n' 
 let g:NERDTreeWinPos = "right" " always open nerdtree at right hand position 
 let g:NERDTreeWinSize = 50
-" load nerdtree when login vim
-" autocmd vimenter * NERDTree
 
-
-" this fonts just for the airline plugin
-Plugin 'powerline/Fonts'
 
 " this plugin for auto close ( or " or {  
 Plugin 'Raimondi/delimitMate'
@@ -179,15 +144,9 @@ Plugin 'Raimondi/delimitMate'
 " Track the engine
 Plugin 'honza/vim-snippets'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup'
+" add google translation
+Plugin 'echuraev/translate-shell.vim'
+let g:trans_default_direction = ":zh"
 
 " All of your Plugins must be added before the following line
 call vundle#end()       "required
@@ -212,7 +171,7 @@ set shortmess+=c
 set cursorline
 highlight CursorLine ctermbg=155
 
-set completeopt=menu
+set completeopt=menuone,noselect,noinsert
 
 
 "allow html snippets run on php
@@ -237,7 +196,7 @@ set autoread
 set timeoutlen=1000 ttimeoutlen=0
 
 " set the relative line number
-set relativenumber 
+" set relativenumber 
 
 let mapleader = ","
 
@@ -266,7 +225,9 @@ source $VIMRUNTIME/menu.vim
 
 " Turn on the Wild menu
 set wildmenu
+set wildchar=<TAB>
 set wildmode=list:longest,full
+
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -326,7 +287,7 @@ set novisualbell
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+set foldcolumn=5
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -468,13 +429,13 @@ set viminfo^=%
 set laststatus=2
 
 " width of a documentation
-set tw=99
+set tw=100
 
 " set color columne
 set colorcolumn=100
 
 " set the highlight color for rightside line
-highlight ColorColumn ctermbg=80 
+highlight ColorColumn ctermbg=50 
 
 set wrap "Wrap lines
 
@@ -496,32 +457,24 @@ nnoremap G Gzz
 " make save simple
 nnoremap ss :w<CR>
 
-"Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-vnoremap <C-S-j> :m '>+1<CR>gv=gv
-vnoremap <C-S-k> :m '<-2<CR>gv=gv
 
-" mapping for ycm
-" check header file 
-nnoremap <leader>ji :YcmCompleter GoToInclude<cr>
-" check declarition
-nnoremap <leader>jc :YcmCompleter GoToDeclaration<cr>
-" check definition
-nnoremap <leader>jd :YcmCompleter GoToDefinition<cr>
-" goto means try best to find something under current cursor 
-nnoremap <leader>jg :YcmCompleter GoTo<cr>
-" check reference for python javascript
-nnoremap <leader>jr :YcmCompleter GoToReferences<cr>
-" check current varible type
-nnoremap <leader>gt :YcmCompleter GetType<cr>
-" get documentation
-nnoremap <leader>gd :YcmCompleter GetDoc<cr>
+"Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+vnoremap <Up> :m '<-2<CR>gv=gv
+vnoremap <Down> :m '>+1<CR>gv=gv
+
 
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
+
+" mapping google translate
+nnoremap <silent> <leader>t :Trans<CR>
+vnoremap <silent> <leader>t :Trans<CR>
+
 " mapping for convert lowercase to uppercase
 nnoremap <c-u> viW<s-u>
+
 
 if has("mac") || has("macunix")
     nnoremap <D-j> <M-j>
@@ -534,7 +487,7 @@ endif
 nnoremap <leader>c :! gcc % -o %< <cr>
 
 " compiler c programing with gtk
-nnoremap <leader>t :! gcc `pkg-config --cflags gtk+-3.0` % -w -o %< `pkg-config --libs gtk+-3.0` <cr>
+" nnoremap <leader>t :! gcc `pkg-config --cflags gtk+-3.0` % -w -o %< `pkg-config --libs gtk+-3.0` <cr>
 
 " run c programing
 nnoremap <leader>r \rr
