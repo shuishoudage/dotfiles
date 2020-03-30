@@ -30,7 +30,6 @@
 "    -> Moving around, tabs and buffers
 "    -> Status line
 "    -> Editing mappings
-"
 "    -> vimgrep searching and cope displaying
 "    -> Spell checking
 "    -> Misc
@@ -69,6 +68,19 @@ Plugin 'vim-airline/vim-airline'
 " let g:airline_powerline_fonts=1
 " let g:airline#extensions#tabline#enabled = 1
 
+" adding autocompletion functionality
+Plugin 'ervandew/supertab'
+let g:SuperTabMappingForward = '<nul>'
+let g:SuperTabMappingBackward = '<s-nul>'
+
+" asynctask runner
+Plugin 'skywind3000/asynctasks.vim'
+Plugin 'skywind3000/asyncrun.vim'
+let g:asyncrun_open = 6
+
+" golang plugin
+Plugin 'fatih/vim-go'
+
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme='powerlineish'
 
@@ -102,7 +114,6 @@ let g:pymode_repo = 0
 let g:pymode_repo_lookup_project = 0
 
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => functional support 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -110,10 +121,54 @@ let g:pymode_repo_lookup_project = 0
 " Plugin 'ternjs/tern_for_vim'
 
 
-" markdown preview
-Plugin 'JamshedVesuna/vim-markdown-preview'
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Google Chrome'
+" Markdown enrichment
+Plugin 'SidOfc/mkdx'
+" :h mkdx-settings
+let g:mkdx#settings = {
+      \ 'image_extension_pattern': 'a\?png\|jpe\?g\|gif',
+      \ 'restore_visual':          1,
+      \ 'enter':                   { 'enable': 1, 'malformed': 1, 'o': 1,
+      \                              'shifto': 1, 'shift': 0 },
+      \ 'map':                     { 'prefix': '<leader>', 'enable': 1 },
+      \ 'tokens':                  { 'enter': ['-', '*', '>'],
+      \                              'bold': '**', 'italic': '*', 'strike': '',
+      \                              'list': '-', 'fence': '',
+      \                              'header': '#' },
+      \ 'checkbox':                { 'toggles': [' ', '-', 'x'],
+      \                              'update_tree': 2,
+      \                              'initial_state': ' ' },
+      \ 'toc':                     { 'text': "TOC", 'list_token': '-',
+      \                              'update_on_write': 0,
+      \                              'position': 0,
+      \                              'details': {
+      \                                 'enable': 0,
+      \                                 'summary': 'Click to expand {{toc.text}}',
+      \                                 'nesting_level': -1,
+      \                                 'child_count': 5,
+      \                                 'child_summary': 'show {{count}} items'
+      \                              }
+      \                            },
+      \ 'table':                   { 'divider': '|',
+      \                              'header_divider': '-',
+      \                              'align': {
+      \                                 'left':    [],
+      \                                 'center':  [],
+      \                                 'right':   [],
+      \                                 'default': 'center'
+      \                              }
+      \                            },
+      \ 'links':                   { 'external': {
+      \                                 'enable': 0, 'timeout': 3, 'host': '', 'relative': 1,
+      \                                 'user_agent':  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/9001.0.0000.000 vim-mkdx/1.9.1'
+      \                              },
+      \                              'fragment': {
+      \                                 'jumplist': 1,
+      \                                 'complete': 1
+      \                              }
+      \                            },
+      \ 'highlight':               { 'enable': 0 },
+      \ 'auto_update':             { 'enable': 0 }
+    \ }
 
 " plugin for quick navigate --> esay motion
 Plugin 'easymotion/vim-easymotion'
@@ -173,6 +228,9 @@ highlight CursorLine ctermbg=155
 
 set completeopt=menuone,noselect,noinsert
 
+" set cursor in different mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 "allow html snippets run on php
 au BufRead,BufNewfile *.php set ft=php.html
