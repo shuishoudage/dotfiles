@@ -293,3 +293,4 @@ bind-key C-t send-prefix
 
 # move status line to top
 #set -g status-position top
+
