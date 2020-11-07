@@ -291,6 +291,11 @@ set-option -g prefix C-t
 set-option -g prefix2 C-t
 bind-key C-t send-prefix
 
+# split current window horizontally
+bind \ split-window -h
+# split current window vertically
+bind - split-window -v
+
 # move status line to top
 #set -g status-position top
 

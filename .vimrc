@@ -84,6 +84,8 @@ Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme='powerlineish'
 
+Plugin 'bkad/CamelCaseMotion'
+let g:camelcasemotion_key = '<leader>'
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
